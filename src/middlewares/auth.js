@@ -1,10 +1,9 @@
-const jwt = require('jsonwebtoken');
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
-const config = require('../config/config');
-const catchAsync = require('../utils/catchAsync');
-const User = require('../models/user.model');
-const { tokenTypes } = require('../config/tokens');
+import jwt from 'jsonwebtoken';
+import httpStatus from 'http-status';
+import config from '../config/config.js';
+import User from '../models/user.model.js';
+import tokenTypes from '../config/tokens.js';
+import { ApiError, catchAsync } from '../utils/index.js';
 
 /**
  * Middleware to authenticate a JWT token and attach the user to the request object.
@@ -47,4 +46,4 @@ const auth = (requiredRoles = []) =>
     next();
   });
 
-module.exports = auth;
+export default auth;

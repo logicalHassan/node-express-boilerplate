@@ -1,5 +1,5 @@
-const multer = require('multer');
-const path = require('path');
+import path from 'node:path';
+import multer from 'multer';
 
 const ALLOWED_FILE_SIZE = 2000000; // 2MB
 
@@ -24,4 +24,4 @@ const upload = multer({
   },
 });
 
-module.exports = upload;
+export default upload;

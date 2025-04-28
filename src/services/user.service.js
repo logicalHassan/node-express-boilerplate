@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const { User } = require('../models');
-const ApiError = require('../utils/ApiError');
+import httpStatus from 'http-status';
+import { User } from '../models/index.js';
+import { ApiError } from '../utils/index.js';
 
 /**
  * Create a new user.
@@ -139,7 +139,7 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
-module.exports = {
+export default {
   createUser,
   bulkInsertUsers,
   queryUsers,

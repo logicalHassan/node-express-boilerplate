@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "nodemon src/index.js",
@@ -23,6 +24,7 @@
     "cross-env": "^7.0.0",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
+    "eslint-plugin-import": "^2.31.0",
     "express": "^4.19.2",
     "express-mongo-sanitize": "^2.0.0",
     "express-rate-limit": "^7.4.0",
@@ -44,7 +46,6 @@
     "eslint": "^7.0.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-security": "^1.4.0",
     "husky": "^9.1.7",

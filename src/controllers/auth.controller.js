@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const { authService, tokenService, emailService, otpService, userService } = require('../services');
+import httpStatus from 'http-status';
+import catchAsync from '../utils/catchAsync.js';
+import { authService, tokenService, emailService, otpService, userService } from '../services/index.js';
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -48,7 +48,7 @@ const verifyEmail = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-module.exports = {
+export default {
   register,
   login,
   logout,

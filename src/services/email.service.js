@@ -1,10 +1,9 @@
-const nodemailer = require('nodemailer');
-const config = require('../config/config');
-const logger = require('../config/logger');
-const { PASSWORD_RESET_REQUEST, VERIFICATION_EMAIL, PASSWORD_RESET_SUCCESS } = require('../utils/emailTemplates');
+import nodemailer from 'nodemailer';
+import config from '../config/config.js';
+import logger from '../config/logger.js';
+import { PASSWORD_RESET_REQUEST, PASSWORD_RESET_SUCCESS, VERIFICATION_EMAIL } from '../utils/emailTemplates.js';
 
-//* Nodemailer transport instance with SMTP configuration
-
+// Nodemailer transport instance with SMTP configuration
 const transport = nodemailer.createTransport(config.email.smtp);
 if (config.env !== 'test') {
   transport
@@ -41,7 +40,7 @@ const sendVerificationEmail = async (to, otp) => {
   await sendEmail(to, subject, html);
 };
 
-module.exports = {
+export default {
   transport,
   sendEmail,
   sendResetPasswordEmail,

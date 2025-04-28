@@ -1,10 +1,10 @@
-const express = require('express');
-const auth = require('../middlewares/auth');
-const validate = require('../middlewares/validate');
-const userValidation = require('../validations/user.validation');
-const userController = require('../controllers/user.controller');
-const upload = require('../config/multer');
-const { ADMIN } = require('../config/roles');
+import express from 'express';
+import validate from '../middlewares/validate.js';
+import auth from '../middlewares/auth.js';
+import upload from '../config/multer.js';
+import { ADMIN } from '../config/roles.js';
+import userController from '../controllers/user.controller.js';
+import userValidation from '../validations/user.validation.js';
 
 const router = express.Router();
 
@@ -26,4 +26,4 @@ router
   .patch(auth([ADMIN]), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth([ADMIN]), validate(userValidation.deleteUser), userController.deleteUser);
 
-module.exports = router;
+export default router;

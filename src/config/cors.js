@@ -1,9 +1,9 @@
-const cors = require('cors');
-const config = require('./config');
+import cors from 'cors';
+import config from './config.js';
 
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' ? config.frontend.url : '*',
   //   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
 };
 
-module.exports = cors(corsOptions);
+export default cors(corsOptions);

@@ -1,3 +1,5 @@
-module.exports.Token = require('./token.model');
-module.exports.User = require('./user.model');
-module.exports.Otp = require('./otp.model');
+import User from './user.model.js';
+import Token from './token.model.js';
+import Otp from './otp.model.js';
+
+export { User, Token, Otp };

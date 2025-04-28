@@ -10,6 +10,14 @@
     "ecmaVersion": 2020
   },
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "always",
+        "json": "always"
+      }
+    ],
     "no-console": "error",
     "func-names": "off",
     "no-underscore-dangle": "off",

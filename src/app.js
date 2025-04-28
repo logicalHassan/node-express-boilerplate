@@ -1,16 +1,15 @@
-const express = require('express');
-const helmet = require('helmet');
-const xss = require('xss-clean');
-const mongoSanitize = require('express-mongo-sanitize');
-const compression = require('compression');
-const httpStatus = require('http-status');
-const routes = require('./routes');
-const config = require('./config/config');
-const morgan = require('./config/morgan');
-const corsConfig = require('./config/cors');
-const { authLimiter } = require('./middlewares/rateLimiter');
-const { errorConverter, errorHandler } = require('./middlewares/error');
-const ApiError = require('./utils/ApiError');
+import express from 'express';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
+import compression from 'compression';
+import httpStatus from 'http-status';
+import routes from './routes/index.js';
+import config from './config/config.js';
+import morgan from './config/morgan.js';
+import corsConfig from './config/cors.js';
+import authLimiter from './middlewares/rateLimiter.js';
+import { errorConverter, errorHandler } from './middlewares/error.js';
+import { ApiError } from './utils/index.js';
 
 const app = express();
 
@@ -29,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // sanitize request data
-app.use(xss());
+// TODO: sanitize xss requests
 app.use(mongoSanitize());
 
 // gzip compression
@@ -58,4 +57,4 @@ app.use(errorConverter);
 // handle error
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

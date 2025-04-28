@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 function generateRandomOtp(length = 6) {
   const buffer = crypto.randomBytes(length);
@@ -8,4 +8,4 @@ function generateRandomOtp(length = 6) {
   return lastSixDigits;
 }
 
-module.exports = generateRandomOtp;
+export default generateRandomOtp;

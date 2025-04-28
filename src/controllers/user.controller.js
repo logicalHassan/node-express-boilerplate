@@ -1,10 +1,8 @@
-const fs = require('fs');
-const csv = require('csv-parser');
-const httpStatus = require('http-status');
-const catchAsync = require('../utils/catchAsync');
-const pick = require('../utils/pick');
-const ApiError = require('../utils/ApiError');
-const { userService } = require('../services');
+import fs from 'node:fs';
+import csv from 'csv-parser';
+import httpStatus from 'http-status';
+import userService from '../services/user.service.js';
+import { catchAsync, pick, ApiError } from '../utils/index.js';
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -71,7 +69,7 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-module.exports = {
+export default {
   createUser,
   bulkInsertUsers,
   getUsers,

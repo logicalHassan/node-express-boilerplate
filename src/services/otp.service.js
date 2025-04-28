@@ -1,8 +1,7 @@
-const httpStatus = require('http-status');
-const Otp = require('../models/otp.model');
-const ApiError = require('../utils/ApiError');
-const generateRandomOtp = require('../utils/generateOtp');
-const { userService } = require('.');
+import httpStatus from 'http-status';
+import userService from './user.service.js';
+import { ApiError, generateRandomOtp } from '../utils/index.js';
+import { Otp } from '../models/index.js';
 
 const OTP_EXPIRATION_MS = 2 * 60 * 1000; // 2 minutes
 
@@ -73,7 +72,7 @@ const verifyOtp = async (userId, otp) => {
   await deleteOtp(userId);
 };
 
-module.exports = {
+export default {
   generateAndSaveOtp,
   verifyOtp,
 };
