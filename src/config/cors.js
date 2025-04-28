@@ -1,5 +1,5 @@
 const cors = require('cors');
-const config = require('./config'); // Adjust the path
+const config = require('./config');
 
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' ? config.frontend.url : '*',
