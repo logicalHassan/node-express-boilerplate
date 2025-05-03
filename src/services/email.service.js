@@ -1,12 +1,12 @@
 const nodemailer = require('nodemailer');
-const config = require('../config/config');
+const env = require('../config/env');
 const logger = require('../config/logger');
 const { PASSWORD_RESET_REQUEST, VERIFICATION_EMAIL, PASSWORD_RESET_SUCCESS } = require('../utils/emailTemplates');
 
 //* Nodemailer transport instance with SMTP configuration
 
-const transport = nodemailer.createTransport(config.email.smtp);
-if (config.env !== 'test') {
+const transport = nodemailer.createTransport(env.email.smtp);
+if (env.mode !== 'test') {
   transport
     .verify()
     .then(() => logger.info('Connected to email server'))
@@ -15,14 +15,14 @@ if (config.env !== 'test') {
 
 // Send an email
 const sendEmail = async (to, subject, html) => {
-  const msg = { from: config.email.from, to, subject, html };
+  const msg = { from: env.email.from, to, subject, html };
   await transport.sendMail(msg);
 };
 
 // Send reset password email
 const sendResetPasswordEmail = async (to, token) => {
   const subject = 'Reset password';
-  const resetPasswordUrl = `${config.frontend.url}/reset-password?token=${token}`;
+  const resetPasswordUrl = `${env.frontend.url}/reset-password?token=${token}`;
   const html = PASSWORD_RESET_REQUEST(resetPasswordUrl);
   await sendEmail(to, subject, html);
 };

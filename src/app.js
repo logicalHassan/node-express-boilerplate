@@ -5,7 +5,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const httpStatus = require('http-status');
 const routes = require('./routes');
-const config = require('./config/config');
+const env = require('./config/env');
 const morgan = require('./config/morgan');
 const corsConfig = require('./config/cors');
 const { authLimiter } = require('./middlewares/rateLimiter');
@@ -14,7 +14,7 @@ const ApiError = require('./utils/ApiError');
 
 const app = express();
 
-if (config.env !== 'test') {
+if (env.mode !== 'test') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
 }
@@ -40,7 +40,7 @@ app.use(corsConfig);
 app.options('*', corsConfig);
 
 // limit repeated failed requests to auth endpoints
-if (config.env === 'production') {
+if (env.mode === 'production') {
   app.use('/api/auth', authLimiter);
 }
 

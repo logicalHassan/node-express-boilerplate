@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const config = require('../config/config');
+const env = require('../config/env');
 const catchAsync = require('../utils/catchAsync');
-const User = require('../models/user.model');
 const { tokenTypes } = require('../config/tokens');
+const { userService } = require('../services');
 
 /**
  * Middleware to authenticate a JWT token and attach the user to the request object.
@@ -17,17 +17,13 @@ const authenticateToken = async (req) => {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'No token provided');
   }
 
-  const payload = jwt.verify(token, config.jwt.secret);
+  const payload = jwt.verify(token, env.jwt.secret);
 
   if (payload.type !== tokenTypes.ACCESS) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid token type');
   }
 
-  const user = await User.findById(payload.sub);
-
-  if (!user) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'User not found');
-  }
+  const user = await userService.getUserById(payload.sub);
 
   req.user = user;
 };
@@ -40,7 +36,7 @@ const auth = (requiredRoles = []) =>
     await authenticateToken(req, res);
     const { role } = req.user;
 
-    if (!requiredRoles.lenght && !requiredRoles.includes(role)) {
+    if (requiredRoles.lenght && !requiredRoles.includes(role)) {
       throw new ApiError(httpStatus.FORBIDDEN, 'Access denied, Role not allowed');
     }
 
