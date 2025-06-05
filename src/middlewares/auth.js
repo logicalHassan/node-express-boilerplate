@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
+const ApiError = require('../utils/api-error');
 const env = require('../config/env');
-const catchAsync = require('../utils/catchAsync');
+const catchAsync = require('../utils/catch-async');
 const { tokenTypes } = require('../config/tokens');
 const { userService } = require('../services');
 
