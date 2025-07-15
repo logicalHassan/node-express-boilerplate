@@ -4,12 +4,22 @@ const env = require('./config/env');
 const logger = require('./config/logger');
 
 let server;
-mongoose.connect(env.mongoose.url).then(() => {
-  logger.info('Connected to MongoDB');
-  server = app.listen(env.port, () => {
-    logger.info(`Listening to port ${env.port}`);
-  });
-});
+
+async function startServer() {
+  try {
+    await mongoose.connect(env.mongoose.url);
+    logger.info('Connected to MongoDB');
+
+    server = app.listen(env.port, () => {
+      logger.info(`Listening on port ${env.port}`);
+    });
+  } catch (error) {
+    logger.error('Error starting server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 const exitHandler = () => {
   if (server) {
